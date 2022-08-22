@@ -10,7 +10,6 @@ import java.util.*;
 
 public class ComponentApp {
     public static HttpURLConnection connectionToPointercrate;
-    public static HttpURLConnection connectionToRandom;
     public static void main(String[] args){
 
         BufferedReader reader;
@@ -58,16 +57,30 @@ public class ComponentApp {
     }
 
 
-    public static String parse(String responseBody, Integer[] list ){
+    public static void parse(String responseBody, Integer[] list ){
         JSONArray demons = new JSONArray(responseBody);
+        int percent = 0;
+        int score = 0;
+        Scanner input = new Scanner(System.in);
         for(int i = 0; i<demons.length(); i++){
             JSONObject demon = demons.getJSONObject(list[i]);
             int levelID = demon.getInt("level_id");
             int position = demon.getInt("position");
             String name = demon.getString("name");
             System.out.println(position+". "+name+" ID : "+levelID);
+            System.out.println("You need at least "+(percent+1)+"% to unlock the next level");
+            System.out.print("What did you get: ");
+            percent = input.nextInt();
+            while(percent >100) {
+                System.out.println("Input a valid percentage: ");
+                percent = input.nextInt();
+            }
+            score++;
+            if(percent==100){
+                System.out.println("Well done! You scored " + score);
+                break;
+            }
         }
-        return null;
     }
 
 }
