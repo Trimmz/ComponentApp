@@ -36,7 +36,6 @@ public class ComponentApp {
                 responseContent.append(line);
             }
             reader.close();
-            System.out.println(responseContent);
         } catch(IOException e){
             e.printStackTrace();
         } finally {
